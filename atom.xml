@@ -4,7 +4,7 @@
   <title><![CDATA[Marek Lewandowski]]></title>
   <link href="http://mklew.github.io/atom.xml" rel="self"/>
   <link href="http://mklew.github.io/"/>
-  <updated>2014-02-22T22:37:48+01:00</updated>
+  <updated>2014-02-23T12:56:03+01:00</updated>
   <id>http://mklew.github.io/</id>
   <author>
     <name><![CDATA[Marek Lewandowski]]></name>
@@ -20,19 +20,19 @@
     <id>http://mklew.github.io/blog/2014/02/22/analysis-of-antony-bryants-paper</id>
     <content type="html"><![CDATA[<h3>&ldquo;Metaphor, myth and mimicry: The bases of software engineering&rdquo;</h3>
 
-<p>For the most of the first half of article author discusses &ldquo;software engineering&rdquo; metaphor, and whether some of the concepts from engineering field have sense in software development discipline. Author states that language used has impact. Metaphors come with some linguistic baggage but can lead to perceiving things differently which itself can advance theory and practices of software development.</p>
+<p>For most of the first half of article author discusses &ldquo;software engineering&rdquo; metaphor, and whether some of the concepts from engineering field have sense in software development discipline. Author states that language used has impact. Metaphors come with some linguistic baggage but can lead to perceiving things differently which itself can advance theory and practices of software development.</p>
 
 <p>In my opinion it does not matter whether someone disapproves calling software developers engineers. That word indeed comes with a lot of baggage. I am an engineer and if I say only that then people might think that I know how to make a shed. They get back on track when I add that I am software engineer. Obviously some things have changed in perception of software engineers since author published article, but even still the word &lsquo;engineer&rsquo; alone comes with connotations. In the end it does not matter, all that matters is working software. In order to get to that point one has to face problem of software requirements which is being discussed in second half of the article.</p>
 
 <p>At this point it is worth noting article was published more than decade ago which in this area seems more like a century. At the very beginning Bryant uses expression &ldquo;requirements phase&rdquo; and after that discusses multiple nouns that can be added before or after word &ldquo;requirements&rdquo;. I am more interested in the word phase. Nowadays it is obsolete to talk about phase. From my experience requirements are being gathered and changed during whole development process. It is hard to talk about any time-boxed phase.
 Let&rsquo;s keep that in mind and go on further with analysis.</p>
 
-<p>Bryant brings up two communication schemes presented by Reddy. One called toolmakers paradigm and the other condiut metaphor.
+<p>Bryant brings up two communication schemes presented by Reddy. One called toolmakers paradigm and the other conduit metaphor.
 Bryant says that &ldquo;The terminology in current use is heavily slanted towards the conduit metaphor&rdquo;. Then he says</p>
 
 <blockquote><p>&ldquo;How much more effective might the requirements process become if viewed in terms of a dialogue between distinct parties, each with their own assumptions and cognitive processes; where achievement of mutual understanding is a prime objective, but one which will not be reached without communicative effort from all participants&rdquo; and follows with &ldquo;perhaps a change in the metaphor about communication during the requirements process can have a similar impact.&rdquo;</p></blockquote>
 
-<p>I think that a lot of changed in that matter. I would say that both parties understand the problem of communication and requirements. Nowadays it is more like &ldquo;toolmakers paradigm&rdquo;. There are movements like DDD which put special emphasis on understanding domain of the problem. It comes with new terminology like &ldquo;knowledge crunching&rdquo; which might be more suitable to toolmakers paradigm. However even though DDD is well known it is not very well understood by majority of developers. Moving to other example, agile methodologies help with requirements in a way similar to showing blueprints like in toolmaker&rsquo;s story, but here blueprint is a working software according to some requirements which will change. Change of requirements is anticipated from the start. If the communication was wrong, if there were misunderstandings then it is nothing unexpected. It is the norm. Requirements change along with deeper understanding of domain by developers as well as clearer vision of what client really wants.
+<p>I think that a lot changed in that matter. I would say that both parties understand the problem of communication and requirements. Nowadays it is more like &ldquo;toolmakers paradigm&rdquo;. There are movements like DDD which put special emphasis on understanding domain of the problem. It comes with new terminology like &ldquo;knowledge crunching&rdquo; which might be more suitable to toolmakers paradigm. However even though DDD is well known it is not very well understood by majority of developers. Moving to other example, agile methodologies help with requirements in a way similar to showing blueprints like in toolmaker&rsquo;s story, but here blueprint is a working software according to some requirements which will change. Change of requirements is anticipated from the start. If the communication was wrong, if there were misunderstandings then it is nothing unexpected. It is the norm. Requirements change along with deeper understanding of domain by developers as well as clearer vision of what client really wants.
 However it is not always the case that agile methodology is used because it requires client to actively participate. These clients have mindset focused on &ldquo;achieving mutual understanding&rdquo; because this is what is most economically reasonable. What about others? Some of them live in world where communication is done only in one direction and only through written documents. In conclusion it is getting better but there is still a long distance to go.</p>
 
 <p>Bryant says:</p>
