@@ -4,7 +4,7 @@
   <title><![CDATA[Marek Lewandowski]]></title>
   <link href="http://mklew.github.io/atom.xml" rel="self"/>
   <link href="http://mklew.github.io/"/>
-  <updated>2014-02-23T12:56:03+01:00</updated>
+  <updated>2014-03-02T22:31:33+01:00</updated>
   <id>http://mklew.github.io/</id>
   <author>
     <name><![CDATA[Marek Lewandowski]]></name>
@@ -12,6 +12,70 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mental Models in a Product Design]]></title>
+    <link href="http://mklew.github.io/blog/2014/03/02/about-design/"/>
+    <updated>2014-03-02T14:30:26+01:00</updated>
+    <id>http://mklew.github.io/blog/2014/03/02/about-design</id>
+    <content type="html"><![CDATA[<p>You probably already have some mental model of this posts just by reading its title. You might think that you are going to read something about software design, good practices, patterns and such because you know that this is developer&rsquo;s blog. If you don&rsquo;t know what mental model is, don&rsquo;t worry, you will soon.</p>
+
+<p>Today&rsquo;s post is about design of the whole product (whatever it may be) not just software stuff. Concretely I am going to discuss importance of mental and conceptual models in the design process. Let&rsquo;s start by getting on the same page with two definitions of design.</p>
+
+<blockquote><p>[design is a] combination of aesthetics, <br/>economics, usability and manufacturability</p><footer><strong>Don Norman</strong> <cite>The Design of Everyday Things</cite></footer></blockquote>
+
+
+
+
+<blockquote><p>Design is the creative process in which we <br/>use our intuition and analytical ability to <br/>understand the opportunities and <br/>constraints business goals, competitive <br/>markets, customer needs, and technologies <br/>present, then envision, communicate, and <br/>realize practical solutions that meet <br/>customer needs and create business value.</p><footer><strong>Pabini Gabriel-Petit</strong></footer></blockquote>
+
+
+<p>During design phase desingers think of what product should do and how it should be interacted with. They think how elements of the product are manipulated in order to perform some task. This all together is called product concept.</p>
+
+<h1>Mental model</h1>
+
+<p>Starting with definiton, following with example.</p>
+
+<blockquote><p>A mental model represents a person’s thought process for how something works (i.e., a person’s understanding of the surrounding world). Mental models are based on incomplete facts, past experiences, and even intuitive perceptions. They help shape actions and behavior, influence what people pay attention to in complicated situations, and define how people approach and solve problems.</p><footer><strong>Susan Carey</strong> <cite>Cognitive Science and Science Education</cite></footer></blockquote>
+
+
+<p>Definition of mental model is rather simple, but it can be even simpler given concrete example. Let&rsquo;s say that I tell you that I&rsquo;ve made scrambled eggs. Based on that information you probably can think of the process of making scrambled eggs. Based on your own kitchen experiences you know that I had to take eggs from the fridge, put some butter on the pan then break eggs and stir a little bit so it will not stick to the pan. Instead of butter you might think about olive oil or something else. The most important thing in that example is that you have some model, some expectations, some thought process about cooking scrambled eggs. You don&rsquo;t have complete information so you have some assumptions &ndash; maybe even more of them than I described if you like fancy eggs. That mental image of the process is what we call mental model.</p>
+
+<p>Conceptual model can be derived from product concept. Conceptual model is the actual thing given to the user. It is what has been designed and then produced and showed to the user. Now that we know about two models we can discuss how these two relate to each other.</p>
+
+<p><span class='pullquote-right' data-pullquote='mental model is constraint on innovation'>
+Some say that a well designed product should have conceptual model which conforms to the user&rsquo;s mental model. I see one problem right there. If designers strictly follow user&rsquo;s mental model then there might be no room for any innovations. I would argue that mental model is constraint on innovation because if you want to create a product which will revolutionize market and greatly improve current users&#8217; experience, but interaction with it is completely outside of bounds of users&#8217; mental model then you have a problem of changing users&#8217; mental model so that it fits your new product.
+</span></p>
+
+<p>Sometimes users are just used to poor experience and do not expect anything much better. Their expectations will not rise to the completely different level. Henry Ford knows something about it.</p>
+
+<blockquote><p>If I had asked people what they wanted, they would have said faster horses.</p><footer><strong>Henry Ford</strong></footer></blockquote>
+
+
+<p>Users of means of transport had mental model of using horses. For them, a better product would be stagecoach with more horses. They would not think of something like a car, but designer had. New product which was outside of user&rsquo;s mental model changed its users. That&rsquo;s why design should not always be about going exactly for the mental model of its users because users do not know what is good for them until they see a next best thing.</p>
+
+<p>On the other hand sometimes mental image can be just too strong and changing it seems impossible. I know at least one example from real world.</p>
+
+<h1>Mental model of Windows user</h1>
+
+<p>Windows 8 introduced change to the start button &ndash; it has been removed. Windows users have mental model of using it. Everyone know Start button.</p>
+
+<p>In this example we can see older Windows user who has mental model about the start button. End result? Take a look.</p>
+
+<iframe width="560" height="315" src="http://mklew.github.io//www.youtube.com/embed/v4boTbv9_nU" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Video shows how strong and deeply rooted in one&rsquo;s brain mental models can be. Dramatic change to the product might cause trouble to some portion of users who will not be able to breach to gap between their mental model and conceptual model.</p>
+
+<h2>What can be done about it?</h2>
+
+<p>Such sudden change in the product is not a good idea without proper transition process. I could think of some introductory videos or maybe quick interactive tutorial like in games. When Google changed gmail then there was some help and tips about what changed first time you logged into it. There was information about what is new and how to do what. It looks like a very good approach to the problem. I think of myself as be more of advanced user so I could probably adjust my mental model on my own but having a quick overview of the changes presented nicely was a pleasent experience.</p>
+
+<h1>Summary</h1>
+
+<p>Mental model of the user is important but let&rsquo;s not get crazy about it. There is no single truth about what designers should and should not do. In some cases sudden shift might work and in others it might not. One thing to remember &ndash; you should know what is the mental model of you users. Based on that knowledge you should design your product to either meet that model or plan how to change it so it satisfies your product&rsquo;s conceptual model.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Analysis of Antony Bryant's Paper]]></title>
