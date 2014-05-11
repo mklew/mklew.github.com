@@ -1,0 +1,346 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>10 Usability Heuristics for User Interface Design - Marek Lewandowski</title>
+  <meta name="author" content="Marek Lewandowski">
+
+  
+  <meta name="description" content="Let&rsquo;s discuss Jakob Nielsen&rsquo;s 10 usability heuristics. When you read these guidelines you probably nod and think &ldquo;yes, that&rsquo;s &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mklew.github.io/blog/2014/05/11/10-usability-heuristics-for-user-interface-design">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Marek Lewandowski" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Marek Lewandowski</a></h1>
+  
+    <h2>developer's blog</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mklew.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">10 Usability Heuristics for User Interface Design</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-11T14:17:23+02:00" pubdate data-updated="true">May 11<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Let&rsquo;s discuss <a href="http://www.nngroup.com/articles/ten-usability-heuristics/" title="Guidelines">Jakob Nielsen&rsquo;s 10 usability heuristics</a>. When you read these guidelines you probably nod and think &ldquo;<em>yes, that&rsquo;s right</em>&rdquo;, but the problem is with execution because there are no concrete examples and correct solutions for them. I will try an example which illustrates that guideline is really about. Most of examples are from my experience while working on the enterprise application. I&rsquo;ve spotted similar problems before I have heard about Nielsen&rsquo;s heuristics so you probably might be already familiar with them even if you don&rsquo;t know them.</p>
+
+<h2>1. Visibility of system status</h2>
+
+<p><em>The system should always keep users informed about what is going on, through appropriate feedback within reasonable time.</em></p>
+
+<p>Imagine a form with a button at the end. Once you&rsquo;ve filled all fields in the form you click the save button and</p>
+
+<p>&hellip; nothing happens.</p>
+
+<p>&hellip; you are redirected to some other page in the system.</p>
+
+<p>&hellip; save button disappears and Ok button shows up.</p>
+
+<p>You might have seen systems like this before. Each share the same problem. System status, concretely status of the operation is not shown. It would be much better if user sees notification message about successful operation. If action takes time then immediately after save button has been clicked some kind of <em>in progress bar</em> should be shown. These little things communicate to user that something actually is happening.</p>
+
+<p>I had countless of situation where I was unsure whether I clicked the button or not. Then I clicked it again and after a while I could get an error because of <em>operation in progress</em>. Sounds familiar?</p>
+
+<p>In short: React to user actions, show notifications upon success and error, show progress bars for time-consuming actions.</p>
+
+<h2>2. Match between system and the real world</h2>
+
+<p><em>The system should speak the users&#8217; language, with words, phrases and concepts familiar to the user, rather than system-oriented terms. Follow real-world conventions, making information appear in a natural and logical order.</em></p>
+
+<p>I would argue here and take this guildeline further. I would say that system should be oriented in real-world nomenclature so that interface and real-world convetions are natural consequence of whole approach to product development.</p>
+
+<p>However to give an example. Let&rsquo;s say that form from previous example was for opening a bank account. Let&rsquo;s say that operation failed and we do see notification.</p>
+
+<p>Instead of notification with generic message <em>Operation has failed</em> it&rsquo;s much better to see <em>We couldn&rsquo;t process your account opening request because &hellip;</em></p>
+
+<p>Giving the reason of the failure is not the point in this case, but using a words of the domain is.</p>
+
+<h2>3. User control and freedom</h2>
+
+<p><em>Users often choose system functions by mistake and will need a clearly marked &ldquo;emergency exit&rdquo; to leave the unwanted state without having to go through an extended dialogue. Support undo and redo.</em></p>
+
+<p>This guideline acutally says exactly what we should do. However <em>Undo</em> and <em>Redo</em> is not always a valid options. Having a <em>Cancel</em> everywhere is a good idea. Closing modal windows with <em>Escape</em> key also. As well as with usual close icon. In the last system I&rsquo;ve been working on modals could be discarded in every way mentioned. User should be familar with majority of them.</p>
+
+<h2>4. Consistency and standards</h2>
+
+<p><em>Users should not have to wonder whether different words, situations, or actions mean the same thing. Follow platform conventions</em></p>
+
+<p>This is very important guideline which can be breached easily when there are no clear standards and there are many developers implementing the system. The simplest example is the name of the save button. Is <em>Add</em> the same as <em>Save</em>? These inconsistencies were a commonly reported errors.</p>
+
+<p>Placement is very important as well. If you have different actions on one page and similar set of actions on other page but in different order and/or different location relative to the content then user might be confused.</p>
+
+<h2>5. Error prevention</h2>
+
+<p><em>Even better than good error messages is a careful design which prevents a problem from occurring in the first place. Either eliminate error-prone conditions or check for them and present users with a confirmation option before they commit to the action.</em></p>
+
+<p>Very good example is form validation. Obviosuly you need to check data at the backend so you already have one validation there. One might start questioning validation done at form level, but it greatly increases usability and decreases amount of errors user can see. Validating dynamically each form field is a right way to go. Once a user finishes with one field it should be validated and marked as valid or invalid (remember first rule?). If it&rsquo;s invalid then message should be shown. Even better message with correct example.</p>
+
+<h2>6. Recognition rather than recall</h2>
+
+<p><em>Minimize the user&rsquo;s memory load by making objects, actions, and options visible. The user should not have to remember information from one part of the dialogue to another. Instructions for use of the system should be visible or easily retrievable whenever appropriate.</em></p>
+
+<p>I haven&rsquo;t run into issues with the first part. It is a common sense to make a information visible if it is required to proceed later. I can however give a practical advice on the instructions.</p>
+
+<p>Following standard conventions it might a good idea to put a small icon symbolising help for example question mark which when hovered displays instructions about how to proceed further. It is particularly good because instructions are then focused on the problem, they are always close to origin of the problem. Also the fact that they are hidden until needed is also good because otherwise user could be overwhelmed of information.</p>
+
+<h2>7. Flexibility and efficiency of use</h2>
+
+<p><em>Accelerators &mdash; unseen by the novice user &mdash; may often speed up the interaction for the expert user such that the system can cater to both inexperienced and experienced users. Allow users to tailor frequent actions.</em></p>
+
+<p>I had no previous experience with that one. It is definitely a good idea. Shortcuts to everything is the reason I love IntellJ so much. However there is no easy way to help novice user advance on higher level. They must want to do that by themselves and so they will look at documentation for shortcuts.</p>
+
+<p>In my point of view, this guideline is like a cherry on top. There are more urgent issuses to deal with first. Making navigation faster is a easy when there is a good navigation in the first place.</p>
+
+<h2>8. Aesthetic and minimalist design</h2>
+
+<p><em>Dialogues should not contain information which is irrelevant or rarely needed. Every extra unit of information in a dialogue competes with the relevant units of information and diminishes their relative visibility.</em></p>
+
+<p>Nightmare of every enterprise application. How to cut down on all this required information? If user needs to fill 100 fields because business say so then there is no way around limiting these 100 fields. However there is a way of making it seems like less. Multipage forms are a good way to go. If we can divide these fields into related groups and in 99.99% it is possible then it is much better to ask user just for a bit of information and then advancing for the next step. Again it is important to remember about 1. and showing how many steps are ahead.</p>
+
+<h2>9. Help users recognize, diagnose, and recover from errors</h2>
+
+<p><em>Error messages should be expressed in plain language (no codes), precisely indicate the problem, and constructively suggest a solution.</em></p>
+
+<p>I have already gave an example of this in 2. but then solution wasn&rsquo;t the point. Look at the difference between these two messages:</p>
+
+<ol>
+<li>You cannot order this item.</li>
+<li>You cannot order this item because it is out of stock.</li>
+</ol>
+
+
+<p> What are your thoughts on the first? Mine are like &ldquo;<em>Why? Am I not good enough for you or what?</em>&rdquo;</p>
+
+<p> Second is better however it can be even more better. What is missing? Suggestion for a solution. How about something like:</p>
+
+<p> &ldquo;You cannot order this item because it is out of stock. Click here to be notified when item is back in stock&rdquo;.</p>
+
+<p> Now you have it all.</p>
+
+<h2>10. Help and documentation</h2>
+
+<p><em>Even though it is better if the system can be used without documentation, it may be necessary to provide help and documentation. Any such information should be easy to search, focused on the user&rsquo;s task, list concrete steps to be carried out, and not be too large.</em></p>
+
+<p>Writing a good documentation is a tough task and no one wants to do it. If it has to be done then it is done by the least experienced team member whos time is least expensive. That&rsquo;s the reason why most of the documentation really sucks.</p>
+
+<p>Using contextual help like that from 6. might a good idea. In that way there is no one big documentation but there is always a contextual documentation in hands reach.</p>
+
+<h1>Summary</h1>
+
+<p>At this point I am pretty sure that you have run across at least one of these issues and you knew what you could do. Knowing these guidelines might make you more consious about the problems. There are very easy solutions to most of them. In most cases there are already open source frameworks and collections of other components which can be used. It just requires a little more effort. It is something like <em>Pareto rule</em> &ldquo;20% more effort gives 80% better usability&rdquo;. Even though it&rsquo;s not time consuming it is often something that it is done at the end when deadlines are already breached or close by and bug reports are already coming in so it might be hard to put that additional effort. At least that&rsquo;s from my experience.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Marek Lewandowski</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-11T14:17:23+02:00" pubdate data-updated="true">May 11<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/interaction-design/'>interaction-design</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://mklew.github.io/blog/2014/05/11/10-usability-heuristics-for-user-interface-design/" data-via="mklew_" data-counturl="http://mklew.github.io/blog/2014/05/11/10-usability-heuristics-for-user-interface-design/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/03/26/reflections-on-detailed-interaction-design/" title="Previous Post: Reflections on detailed interaction design">&laquo; Reflections on detailed interaction design</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/05/11/10-usability-heuristics-for-user-interface-design/">10 Usability Heuristics for User Interface Design</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/26/reflections-on-detailed-interaction-design/">Reflections on Detailed Interaction Design</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/02/about-design/">Mental Models in a Product Design</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/22/analysis-of-antony-bryants-paper/">Analysis of Antony Bryant's Paper</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/mklew">@mklew</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'mklew',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Marek Lewandowski -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

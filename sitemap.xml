@@ -2,7 +2,7 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://mklew.github.io/blog/2014/02/22/analysis-of-antony-bryants-paper/</loc>
-        <lastmod>2014-02-23T12:55:49+01:00</lastmod>
+        <lastmod>2014-05-11T14:32:19+02:00</lastmod>
     </url>
     <url>
         <loc>http://mklew.github.io/blog/2014/03/02/about-design/</loc>
@@ -12,15 +12,21 @@
         <loc>
             http://mklew.github.io/blog/2014/03/26/reflections-on-detailed-interaction-design/
         </loc>
-        <lastmod>2014-03-26T13:36:45+01:00</lastmod>
+        <lastmod>2014-05-11T14:32:19+02:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://mklew.github.io/blog/2014/05/11/10-usability-heuristics-for-user-interface-design/
+        </loc>
+        <lastmod>2014-05-11T15:35:45+02:00</lastmod>
     </url>
     <url>
         <loc>http://mklew.github.io/blog/archives/</loc>
-        <lastmod>2014-03-26T13:36:45+01:00</lastmod>
+        <lastmod>2014-05-11T15:35:45+02:00</lastmod>
     </url>
     <url>
         <loc>http://mklew.github.io/</loc>
-        <lastmod>2014-03-26T13:36:45+01:00</lastmod>
+        <lastmod>2014-05-11T15:35:45+02:00</lastmod>
     </url>
     <url>
         <loc>http://mklew.github.io/robots.txt</loc>
