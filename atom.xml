@@ -4,7 +4,7 @@
   <title><![CDATA[Marek Lewandowski]]></title>
   <link href="http://mklew.github.io/atom.xml" rel="self"/>
   <link href="http://mklew.github.io/"/>
-  <updated>2014-05-18T16:40:22+02:00</updated>
+  <updated>2014-06-01T22:37:54+02:00</updated>
   <id>http://mklew.github.io/</id>
   <author>
     <name><![CDATA[Marek Lewandowski]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Internationalization]]></title>
+    <link href="http://mklew.github.io/blog/2014/06/01/internationalization/"/>
+    <updated>2014-06-01T22:20:02+02:00</updated>
+    <id>http://mklew.github.io/blog/2014/06/01/internationalization</id>
+    <content type="html"><![CDATA[<h1>Ramble on Internalization</h1>
+
+<p>Internalization is a tricky subject. It requires quite a lot of work to prepare product to be fully internalizationable. Translating text is the easiest part of the internalization process. Conforming to cultural norms is a tricky part. Unfortunately I have no prior experience with developing products available for example in arabic or asian countries but this seems like interesting challenge. Even though I haven&rsquo;t done it I can notice that it requires a lot of work to test user interfaces across different languagues and keep them consistent. Having a graphic theme also may not be trivial task. But it&rsquo;s not all about presentation. Having appropriate domain model which takes into account for example currency is important as well. That&rsquo;s why it is important to think about these cases even though product is not going to be available worldwide at first. Otherwise adding dollars to yens might yield interesting results.</p>
+
+<h2>I18n in estimation</h2>
+
+<p>Internationalization is one of these things that I completely forgot when I try to give an estimation of time for particular task. It so happens that doing i18n is very tedious job which adds a lot of time for rest of the development time. During last project we left i18n as the last thing to do. I don&rsquo;t know if that was a good choice because it requires a lot of time to go through every screen and translate all the labels. It&rsquo;s also quite error prone. However when it can be done by less people and there are higher chances that key codes for labels are more consistent.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Interaction Design in Mobile Devices]]></title>

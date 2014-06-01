@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Interaction-design | Marek Lewandowski]]></title>
   <link href="http://mklew.github.io/blog/categories/interaction-design/atom.xml" rel="self"/>
   <link href="http://mklew.github.io/"/>
-  <updated>2014-05-18T16:40:22+02:00</updated>
+  <updated>2014-06-01T22:37:54+02:00</updated>
   <id>http://mklew.github.io/</id>
   <author>
     <name><![CDATA[Marek Lewandowski]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Internationalization]]></title>
+    <link href="http://mklew.github.io/blog/2014/06/01/internationalization/"/>
+    <updated>2014-06-01T22:20:02+02:00</updated>
+    <id>http://mklew.github.io/blog/2014/06/01/internationalization</id>
+    <content type="html"><![CDATA[<h1>Ramble on Internalization</h1>
+
+<p>Internalization is a tricky subject. It requires quite a lot of work to prepare product to be fully internalizationable. Translating text is the easiest part of the internalization process. Conforming to cultural norms is a tricky part. Unfortunately I have no prior experience with developing products available for example in arabic or asian countries but this seems like interesting challenge. Even though I haven&rsquo;t done it I can notice that it requires a lot of work to test user interfaces across different languagues and keep them consistent. Having a graphic theme also may not be trivial task. But it&rsquo;s not all about presentation. Having appropriate domain model which takes into account for example currency is important as well. That&rsquo;s why it is important to think about these cases even though product is not going to be available worldwide at first. Otherwise adding dollars to yens might yield interesting results.</p>
+
+<h2>I18n in estimation</h2>
+
+<p>Internationalization is one of these things that I completely forgot when I try to give an estimation of time for particular task. It so happens that doing i18n is very tedious job which adds a lot of time for rest of the development time. During last project we left i18n as the last thing to do. I don&rsquo;t know if that was a good choice because it requires a lot of time to go through every screen and translate all the labels. It&rsquo;s also quite error prone. However when it can be done by less people and there are higher chances that key codes for labels are more consistent.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Interaction Design in Mobile Devices]]></title>
@@ -253,43 +268,6 @@ concerning a software product UI. It consists of information how elements like c
 <h1>Summary</h1>
 
 <p>Mental model of the user is important but let&rsquo;s not get crazy about it. There is no single truth about what designers should and should not do. In some cases sudden shift might work and in others it might not. One thing to remember &ndash; you should know what is the mental model of you users. Based on that knowledge you should design your product to either meet that model or plan how to change it so it satisfies your product&rsquo;s conceptual model.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Analysis of Antony Bryant's Paper]]></title>
-    <link href="http://mklew.github.io/blog/2014/02/22/analysis-of-antony-bryants-paper/"/>
-    <updated>2014-02-22T22:31:13+01:00</updated>
-    <id>http://mklew.github.io/blog/2014/02/22/analysis-of-antony-bryants-paper</id>
-    <content type="html"><![CDATA[<h3>&ldquo;Metaphor, myth and mimicry: The bases of software engineering&rdquo;</h3>
-
-<p>For most of the first half of article author discusses &ldquo;software engineering&rdquo; metaphor, and whether some of the concepts from engineering field have sense in software development discipline. Author states that language used has impact. Metaphors come with some linguistic baggage but can lead to perceiving things differently which itself can advance theory and practices of software development.</p>
-
-<p>In my opinion it does not matter whether someone disapproves calling software developers engineers. That word indeed comes with a lot of baggage. I am an engineer and if I say only that then people might think that I know how to make a shed. They get back on track when I add that I am software engineer. Obviously some things have changed in perception of software engineers since author published article, but even still the word &lsquo;engineer&rsquo; alone comes with connotations. In the end it does not matter, all that matters is working software. In order to get to that point one has to face problem of software requirements which is being discussed in second half of the article.</p>
-
-<p>At this point it is worth noting article was published more than decade ago which in this area seems more like a century. At the very beginning Bryant uses expression &ldquo;requirements phase&rdquo; and after that discusses multiple nouns that can be added before or after word &ldquo;requirements&rdquo;. I am more interested in the word phase. Nowadays it is obsolete to talk about phase. From my experience requirements are being gathered and changed during whole development process. It is hard to talk about any time-boxed phase.
-Let&rsquo;s keep that in mind and go on further with analysis.</p>
-
-<p>Bryant brings up two communication schemes presented by Reddy. One called toolmakers paradigm and the other conduit metaphor.
-Bryant says that &ldquo;The terminology in current use is heavily slanted towards the conduit metaphor&rdquo;. Then he says</p>
-
-<blockquote><p>&ldquo;How much more effective might the requirements process become if viewed in terms of a dialogue between distinct parties, each with their own assumptions and cognitive processes; where achievement of mutual understanding is a prime objective, but one which will not be reached without communicative effort from all participants&rdquo; and follows with &ldquo;perhaps a change in the metaphor about communication during the requirements process can have a similar impact.&rdquo;</p></blockquote>
-
-<p>I think that a lot changed in that matter. I would say that both parties understand the problem of communication and requirements. Nowadays it is more like &ldquo;toolmakers paradigm&rdquo;. There are movements like DDD which put special emphasis on understanding domain of the problem. It comes with new terminology like &ldquo;knowledge crunching&rdquo; which might be more suitable to toolmakers paradigm. However even though DDD is well known it is not very well understood by majority of developers. Moving to other example, agile methodologies help with requirements in a way similar to showing blueprints like in toolmaker&rsquo;s story, but here blueprint is a working software according to some requirements which will change. Change of requirements is anticipated from the start. If the communication was wrong, if there were misunderstandings then it is nothing unexpected. It is the norm. Requirements change along with deeper understanding of domain by developers as well as clearer vision of what client really wants.
-However it is not always the case that agile methodology is used because it requires client to actively participate. These clients have mindset focused on &ldquo;achieving mutual understanding&rdquo; because this is what is most economically reasonable. What about others? Some of them live in world where communication is done only in one direction and only through written documents. In conclusion it is getting better but there is still a long distance to go.</p>
-
-<p>Bryant says:</p>
-
-<blockquote><p>&ldquo;The prototypical engineer is a myth; an influential and important myth, but nevertheless a myth. We must be careful not to mimic the myth; taking engineering as something ‘natural,’ but devoid of explanation.&rdquo;</p></blockquote>
-
-<p>Once again, for me it&rsquo;s just a fancy word which labels me as technical person and professional. Sometimes software developments seems like an art which has very little with engineering. I do not feel any constraints implied by that word. The best I can do is to just improve my skills which help with getting my job done. It does not matter if these are technical skills or not.</p>
-
-<blockquote><p>&ldquo;We do not have to preclude any of the positive aspects of the engineering metaphor, but we do have to move forward recognizing its constraints and deficiencies.&rdquo;
-&ldquo;The introduction of the engineering metaphor moved us forward in the critical activity of developing a discipline for software development; we now have to move this critical activity forward to the next stage.&rdquo;</p></blockquote>
-
-<p>I agree and I think that we have already moved beyond that metaphor to something more substantial than engineer.</p>
-
-<p>In summary I think we moved to that point where developers are pragmatic enough to not care about labels pinned to them. If I had to choose the current metaphor I would say that &ldquo;Software craftsmanship&rdquo; is the most adequate. Maybe that&rsquo;s the next stage Bryant wrote about.</p>
 ]]></content>
   </entry>
   
