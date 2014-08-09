@@ -10,8 +10,8 @@
 
   
   <meta name="description" content="Blog Archive 2014 Internationalization
-Jun 01 2014 posted in interaction-design Interaction Design in Mobile Devices
-May 18 2014 posted in &hellip;">
+Jun 01 2014 posted in interaction-design Dive Into Shapeless
+May 30 2014 Interaction Design in Mobile Devices &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -29,8 +29,8 @@ May 18 2014 posted in &hellip;">
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Noto+Serif:400,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 
   
   <script type="text/javascript">
@@ -58,20 +58,17 @@ May 18 2014 posted in &hellip;">
 
 </header>
   <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
   
 </ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:mklew.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
+
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://pl.linkedin.com/pub/marek-lewandowski/57/4b6/a23/">LinkedIn</a></li>
+  <li><a href="https://github.com/mklew/">GitHub</a></li>
+  <li><a href="https://twitter.com/_mklew">Twitter</a></li>
+  <li><a href="http://semantive.com/">Company</a></li>
 </ul>
 
 </nav>
@@ -100,6 +97,16 @@ May 18 2014 posted in &hellip;">
 <footer>
   <span class="categories">posted in <a class='category' href='/blog/categories/interaction-design/'>interaction-design</a></span>
 </footer>
+
+
+</article>
+
+
+
+<article>
+  
+<h1><a href="/blog/2014/05/30/dive-into-shapeless/">Dive Into Shapeless</a></h1>
+<time datetime="2014-05-30T18:22:22+02:00" pubdate><span class='month'>May</span> <span class='day'>30</span> <span class='year'>2014</span></time>
 
 
 </article>
@@ -181,7 +188,15 @@ May 18 2014 posted in &hellip;">
 
 </div>
 
-<aside class="sidebar">
+  <aside class="sidebar">
+   
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mklew.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
   
     <section>
   <h1>Recent Posts</h1>
@@ -189,6 +204,10 @@ May 18 2014 posted in &hellip;">
     
       <li class="post">
         <a href="/blog/2014/06/01/internationalization/">Internationalization</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/30/dive-into-shapeless/">Dive Into Shapeless</a>
       </li>
     
       <li class="post">
@@ -201,10 +220,6 @@ May 18 2014 posted in &hellip;">
     
       <li class="post">
         <a href="/blog/2014/03/26/reflections-on-detailed-interaction-design/">Reflections on Detailed Interaction Design</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/02/about-design/">Mental Models in a Product Design</a>
       </li>
     
   </ul>
@@ -230,7 +245,7 @@ May 18 2014 posted in &hellip;">
 
         github.showRepos({
             user: 'mklew',
-            count: 0,
+            count: 4,
             skip_forks: true,
             target: '#gh_repos'
         });
@@ -245,6 +260,7 @@ May 18 2014 posted in &hellip;">
 
   
 </aside>
+
 
 
     </div>
@@ -288,6 +304,27 @@ May 18 2014 posted in &hellip;">
 
 
 
+<script>
+  $(document).ready(function() {  
+  var stickyNavTop = $('nav').offset().top;  
+    
+  var stickyNav = function(){  
+  var scrollTop = $(window).scrollTop();  
+         
+  if (scrollTop > stickyNavTop) {   
+      $('nav').addClass('sticky');  
+  } else {  
+      $('nav').removeClass('sticky');   
+  }  
+  };  
+    
+  stickyNav();  
+    
+  $(window).scroll(function() {  
+      stickyNav();  
+  });  
+  });  
+</script>
 
 
 </body>
