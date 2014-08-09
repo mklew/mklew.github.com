@@ -4,7 +4,7 @@
   <title><![CDATA[Marek Lewandowski]]></title>
   <link href="http://mklew.github.io/atom.xml" rel="self"/>
   <link href="http://mklew.github.io/"/>
-  <updated>2014-08-09T15:52:45+02:00</updated>
+  <updated>2014-08-09T15:56:25+02:00</updated>
   <id>http://mklew.github.io/</id>
   <author>
     <name><![CDATA[Marek Lewandowski]]></name>
@@ -25,28 +25,6 @@
 <h2>I18n in estimation</h2>
 
 <p>Internationalization is one of these things that I completely forgot when I try to give an estimation of time for particular task. It so happens that doing i18n is very tedious job which adds a lot of time for rest of the development time. During last project we left i18n as the last thing to do. I don&rsquo;t know if that was a good choice because it requires a lot of time to go through every screen and translate all the labels. It&rsquo;s also quite error prone. However when it can be done by less people and there are higher chances that key codes for labels are more consistent.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Dive Into Shapeless]]></title>
-    <link href="http://mklew.github.io/blog/2014/05/30/dive-into-shapeless/"/>
-    <updated>2014-05-30T18:22:22+02:00</updated>
-    <id>http://mklew.github.io/blog/2014/05/30/dive-into-shapeless</id>
-    <content type="html"><![CDATA[<h1>Type classes</h1>
-
-<p>Retroactive extensions &ndash; the ability to extend software modules with new functionality without needing to touch or re-compile the original source.</p>
-
-<p>Type classes roles:</p>
-
-<pre><code>- to define *concepts* - a set of requirements for the type parameters used by generic algorithms 
-
-i.e. sorting algorithm can be expressed generically for any elements of type T, provided that we know how to compare values of type T.
-
-Concepts are implemented for particular types by a *model*
-
-- to propagate constraints (like ordering function) automatically
-</code></pre>
 ]]></content>
   </entry>
   
