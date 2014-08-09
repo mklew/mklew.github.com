@@ -9,7 +9,7 @@
   <meta name="author" content="Marek Lewandowski">
 
   
-  <meta name="description" content="Ramble on Internalization Internalization is a tricky subject. It requires quite a lot of work to prepare product to be fully internalizationable. &hellip;">
+  <meta name="description" content="This post opens a series about developing a custom intergration solution between two rather known tools. Project management tool Asana and issue &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +74,142 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/09/integrating-asana-with-youtrack-part-1/">Integrating Asana With Youtrack Part I</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-09T16:09:25+02:00" pubdate data-updated="true">Aug 9<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/08/09/integrating-asana-with-youtrack-part-1/#disqus_thread"
+             data-disqus-identifier="http://mklew.github.io/blog/2014/08/09/integrating-asana-with-youtrack-part-1/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This post opens a series about developing a custom intergration solution between two rather known tools. Project management tool <a href="https://asana.com/" title="Asana">Asana</a> and issue tracker done by Jetbrains company <a href="http://www.jetbrains.com/youtrack/" title="Youtrack">Youtrack</a>. Part I defines problem, constraints, functional requirements and gives ideas about the possible solution without going into implementation at this point. Whole point of the series is to show thinking process starting from identifying a problem, through possible solutions including design decisions up to final working software.</p>
+
+<h1>Why?</h1>
+
+<p>Company I work for uses Youtrack for issue tracking but mainly for time reporting. Time reports are presented to the client along with the invoice, client pays and I got paid down the line. However client uses Asana for project management which means that Asana&rsquo;s tasks have to be duplicated in Youtrack. All communication is done at Asana while time is reported at the Youtrack. Mapping tasks to issues manually 1 to 1 would be too hard to do manually, therefore no one is doing that. End result &ndash; Youtrack contains some generic issues like &ldquo;Project X development&rdquo; where time is reported.</p>
+
+<p>Obviously it would be better if there was a 1 to 1 mapping between Asana&rsquo;s tasks and Youtrack&rsquo;s issues and time reporting was done automatically.</p>
+
+<h1>Possible solution</h1>
+
+<p>Given the problems, let&rsquo;s try to find a solution. Quick research didn&rsquo;t yield any results. There is some kind of integration between Asana and Jira using <a href="https://zapier.com/" title="Zapier">Zapier</a> but since we are using Youtrack we are out of luck. I haven&rsquo;t seen this service before so it&rsquo;s worth mentioning. Anyway it looks like there is a need for custom solution.</p>
+
+<h2>Vision statement</h2>
+
+<p>&ldquo;We want devs to spent less time on manual work with time tracking therefore we want a easy to use solution which synchronizes Asana task&rsquo;s with Youtrack&rsquo;s issues and reports time on behalf of developer automatically with best accuracy possible.&rdquo;</p>
+
+<h2>Workflow which enables automatic time reports</h2>
+
+<p>Copying tasks over must be possible with both APIs so it&rsquo;s a no brainer. However automatic time reporting requires certain workflow with Asana. One of the recent clients actually requires workflow which might satisfy technical issues of time tracking.</p>
+
+<p>It goes like this: when dev starts working on a task, he/she is supposed to tag it with &ldquo;wip&rdquo; and when he&rsquo;s done working he/she can remove the tag.</p>
+
+<p>I had a chance of trying this workflow in action and it&rsquo;s not a bulletproof solution, because if work is quite short, trace of adding and removing tag is lost. It still might work if our solution registers the fact that work has been begun. It would be simpler if we had two events in the time, tag added and tag removed. Then time spent is just a difference between tag removal and assignment. However with tag traces disappearing solution needs be more complex.</p>
+
+<p>Alternative solution is leaving a comment with &ldquo;wip&rdquo; token, but it seems like this might be obscuring rest of the communication.</p>
+
+<h2>API analysis</h2>
+
+<p>Before doing any work let&rsquo;s see what can be done with a API. For starters this is what we want to do:</p>
+
+<ol>
+<li><p>query for tasks in Asana possibly with some filtering</p></li>
+<li><p>query issues in Youtrack</p></li>
+<li><p>create issues in Youtrack</p></li>
+<li><p>add time tracking information to issues on behalf developer</p></li>
+</ol>
+
+
+<p>These are minimal requirements for one way integration.</p>
+
+<p>Let&rsquo;s take a look what&rsquo;s actually possible with APIs.</p>
+
+<h2>1. Query for tasks in Asana possibly with some filtering</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>GET    /tasks
+</span><span class='line'>GET    /projects/project-id/tasks
+</span><span class='line'>GET    /workspaces/workspace-id/tasks</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We are in luck. API allows to query for tasks in a project or workspace or all of them. Also limited filtering is possible for example by <code>modified_since</code> attribute which might be useful. General idea of syncing service is that it will probably be run in some intervals therefore filtering by last run&rsquo;s date seems useful.</p>
+
+<h2>2. query issues in Youtrack</h2>
+
+<p>This is required to check if given task has been already synchronized or not. In alternative to querying we could store already mapped tasks&#8217; ids and created issues. However storing anything obviously requires some kind of storage. If solution can deal without storage it is even better assuming that it works the same and within limits of APIs requests per minute.</p>
+
+<p><a href="http://confluence.jetbrains.com/display/YTD5/Get+Issues+in+a+Project" title="get issues in a project">Get issues in a project API</a></p>
+
+<p>Allows to query for issues in a certain project. That&rsquo;s enough. We can assume that project will be configurable later on so we know where to sync and create issues.</p>
+
+<h2>3. create issues in Youtrack</h2>
+
+<p><a href="http://confluence.jetbrains.com/display/YTD5/Create+New+Issue" title="new issue">Create new issue API</a> shows how to do it.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>PUT /rest/issue?{project}&{summary}&{description}&{attachments}&{permittedGroup}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Got it!</p>
+
+<h2>4. add time tracking information to issues on behalf developer</h2>
+
+<p>This one wasn&rsquo;t obvious especially because of &ldquo;on behalf&rdquo; part. We want to see time tracking information as the developer himself would have added. There an specific API which allows to record time, but it adds it as the user who performs request. Is that ok? Well it depends. If you are ok with giving out your credentials so service performs requests as you then sure. Youtrack documentation doesn&rsquo;t mention API keys so only login + cookie workflow is available, hence it requires your credentials.
+I think that better option is if we have some special user on Youtrack which will interact with API and make all requets. Same account can be used in Asana, although Asana supports API keys so that&rsquo;s better. As for now we only query Asana therefore we can do that from special account and if we would need to make some changes on someone else behalf then API keys should be used.</p>
+
+<p>So I found that doing some action as someone else is only possible by <a href="http://confluence.jetbrains.com/display/YTD5/Apply+Command+to+an+Issue" title="apply command">applying command to an issue</a>. There is parameter called <code>runAs</code> which takes login of the user it should be run as. This <code>runAs</code> parameter requires some specific permissions which is fine if we use special account just for our application. Great! Now let&rsquo;s look for adding time tracking information command.</p>
+
+<p>A little bit more search and there it is, <a href="http://confluence.jetbrains.com/display/YTD5/Adding+Work+Items+to+Issue#AddingWorkItemstoIssue-AddingworkitemviaCommandWindow" title="work-item-command">adding work item to issue via command</a></p>
+
+<h2>Deployment</h2>
+
+<p>APIs allow to implement our solution. Some details will be needing clarifications but general building blocks are there. Now before thinking how we would implement it let&rsquo;s think where can we run it.</p>
+
+<p>Let&rsquo;s add another requirement: Running it shouldn&rsquo;t cost money.</p>
+
+<p>This might seem silly, because it&rsquo;s impossible in the long term, but there are cloud providers which give some free time which might be just enough for our solution.</p>
+
+<p>I checked Heroku and Amazon AWS. Heroku allows to run 1 web dyno which goes idle if there is no traffic. Web dyno is not exactly what we would require, but it could work. Problem is with it going idle if there is no traffic. There is another dyno type called <code>worker</code>. Workers never go idle but they cost money therefore are not applicable.</p>
+
+<p>Amazon AWS gives 750 hours a month of <a href="https://aws.amazon.com/free/" title="AmazonAWSfree">Amazon EC2 service</a> which really hits the spot, at least for first year. There is also no problem of anything going idle. Maybe there are better alternatives but for now I got one good candidate and I know I can move on.</p>
+
+<h1>Wrapping up first part</h1>
+
+<p>We identified problem, checked that there are no ready solutions around. Defined requirements for APIs. Checked that APIs satisfy these requirements therefore application can be created. We also found a place to run it for free for the first year.</p>
+
+<p>In the next part I will describe implementation process. <a href="http://spray.io/" title="spray">Spray</a> with <a href="http://akka.io/" title="akka">Akka</a> stack is a good candidate for this integration component because of nice abstractions for interacting with APIs and scheduling built in. Whole application will be run using <a href="https://www.docker.com/" title="Docker">Docker</a> so it will be easy to change the actual server it runs on.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -325,79 +461,6 @@ For example Own Cross-platform design might be suitable for game like applicatio
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/26/reflections-on-detailed-interaction-design/">Reflections on Detailed Interaction Design</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-26T12:23:23+01:00" pubdate data-updated="true">Mar 26<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/03/26/reflections-on-detailed-interaction-design/#disqus_thread"
-             data-disqus-identifier="http://mklew.github.io/blog/2014/03/26/reflections-on-detailed-interaction-design/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Navigation</h2>
-
-<p>Apple desingers knew how important navigation is. Let&rsquo;s take iPod as an example. They came up with idea than favorite mp3 should not be more than 3 clicks away. So in just 3 clicks user is able to navigate through system to his/her favorite music. This is quite powerful feature and proof of importance of well designed navigation.</p>
-
-<p>From my personal experience no effort at all is put into designing a navigation. Maybe because in case of business applications with lots of forms it is just minor concern. Navigation is just a product of grouping requirements together and interface mockups. Maybe projects I&rsquo;ve worked on had no budget and time for it. Whatever the answer is the navigation is there and maybe because it is accidentally fine it is not noticable.</p>
-
-<p>It is surprising that good navigation can be achieved using really simple and really cheap techniques like <strong>card sorting</strong>.</p>
-
-<p>Card sorting technique goes like this:</p>
-
-<ol>
-<li>Determine list of topics</li>
-<li>Make cards</li>
-<li>Select participants</li>
-<li>Run session</li>
-<li>Analyse groupings</li>
-</ol>
-
-
-<p>During the session participants have to rank cards according to their intuition. When finished, participants are asked to put labels on each group. Grouped topics show potential structure for the navigation.</p>
-
-<p>The only tricky part about this technique is the requirement for the participants. They should be representative users. I think this technique could be used even without perfectly representative users internally in the company and still yield useful results or at least more useful than coincidental arrangement of topics.</p>
-
-<h2>Product style guide</h2>
-
-<p>Product style guide is the document compiling all the information
-concerning a software product UI. It consists of information how elements like controls, dialogs, statuses, notifications and pretty much everything else should look like.</p>
-
-<p>To me it seems like very useful document especially when I look at my past experience. Even though we had some design done by graphic still some of the missing parts like notifications differed between screens. Sometimes notification were at the top of the form, sometimes below. Sometimes action button was labeled just &ldquo;Save&rdquo; and sometimes &ldquo;Save changes&rdquo; even though it was used in same context. We had to spent some time fixing these inconsistencies. Having style guide would be much help. It would be good to know how to present list of things, how to present descriptions of items and many more.</p>
-
-<p>I am sure that time spent developing product style guide would be less costly than time required for developers to fix minor incosistencies. Think about your product. It is surprising how much time you spend after all works but still does not look good enough. It takes a lot of time to make all UI sound when there are no clear guidelines or when they arrive really late after most of the work is already done. Having product style guide beforehand would reduce greatly simplify whole process and also decision making of developers.</p>
-
-<p>Now that I am thinking about it over the time we arrived at implicit style guide. Mostly because some useful components like paginated lists with detailed view were developed and incorporated by the rest of the team members. It would be much better to have explicit document.</p>
-
-<p>However there are some problems. Requirements are changing, sometimes it requires change to presentation of things. For example from radio button group to dual multiselection list. It is not pragmatic to develop style for every possible GUI element. Also not all elements are known. That means that development of product style guide should be iterative. It could start with some common base of elements when mockups are done and then it would require adjustments when new elements pop up.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -421,6 +484,10 @@ concerning a software product UI. It consists of information how elements like c
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/08/09/integrating-asana-with-youtrack-part-1/">Integrating Asana With Youtrack Part I</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/01/internationalization/">Internationalization</a>
       </li>
     
@@ -434,10 +501,6 @@ concerning a software product UI. It consists of information how elements like c
     
       <li class="post">
         <a href="/blog/2014/03/26/reflections-on-detailed-interaction-design/">Reflections on Detailed Interaction Design</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/02/about-design/">Mental Models in a Product Design</a>
       </li>
     
   </ul>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Integration | Marek Lewandowski]]></title>
+  <link href="http://mklew.github.io/blog/categories/integration/atom.xml" rel="self"/>
+  <link href="http://mklew.github.io/"/>
+  <updated>2014-08-09T19:45:08+02:00</updated>
+  <id>http://mklew.github.io/</id>
+  <author>
+    <name><![CDATA[Marek Lewandowski]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Integrating Asana With Youtrack Part I]]></title>
+    <link href="http://mklew.github.io/blog/2014/08/09/integrating-asana-with-youtrack-part-1/"/>
+    <updated>2014-08-09T16:09:25+02:00</updated>
+    <id>http://mklew.github.io/blog/2014/08/09/integrating-asana-with-youtrack-part-1</id>
+    <content type="html"><![CDATA[<p>This post opens a series about developing a custom intergration solution between two rather known tools. Project management tool <a href="https://asana.com/" title="Asana">Asana</a> and issue tracker done by Jetbrains company <a href="http://www.jetbrains.com/youtrack/" title="Youtrack">Youtrack</a>. Part I defines problem, constraints, functional requirements and gives ideas about the possible solution without going into implementation at this point. Whole point of the series is to show thinking process starting from identifying a problem, through possible solutions including design decisions up to final working software.</p>
+
+<h1>Why?</h1>
+
+<p>Company I work for uses Youtrack for issue tracking but mainly for time reporting. Time reports are presented to the client along with the invoice, client pays and I got paid down the line. However client uses Asana for project management which means that Asana&rsquo;s tasks have to be duplicated in Youtrack. All communication is done at Asana while time is reported at the Youtrack. Mapping tasks to issues manually 1 to 1 would be too hard to do manually, therefore no one is doing that. End result &ndash; Youtrack contains some generic issues like &ldquo;Project X development&rdquo; where time is reported.</p>
+
+<p>Obviously it would be better if there was a 1 to 1 mapping between Asana&rsquo;s tasks and Youtrack&rsquo;s issues and time reporting was done automatically.</p>
+
+<h1>Possible solution</h1>
+
+<p>Given the problems, let&rsquo;s try to find a solution. Quick research didn&rsquo;t yield any results. There is some kind of integration between Asana and Jira using <a href="https://zapier.com/" title="Zapier">Zapier</a> but since we are using Youtrack we are out of luck. I haven&rsquo;t seen this service before so it&rsquo;s worth mentioning. Anyway it looks like there is a need for custom solution.</p>
+
+<h2>Vision statement</h2>
+
+<p>&ldquo;We want devs to spent less time on manual work with time tracking therefore we want a easy to use solution which synchronizes Asana task&rsquo;s with Youtrack&rsquo;s issues and reports time on behalf of developer automatically with best accuracy possible.&rdquo;</p>
+
+<h2>Workflow which enables automatic time reports</h2>
+
+<p>Copying tasks over must be possible with both APIs so it&rsquo;s a no brainer. However automatic time reporting requires certain workflow with Asana. One of the recent clients actually requires workflow which might satisfy technical issues of time tracking.</p>
+
+<p>It goes like this: when dev starts working on a task, he/she is supposed to tag it with &ldquo;wip&rdquo; and when he&rsquo;s done working he/she can remove the tag.</p>
+
+<p>I had a chance of trying this workflow in action and it&rsquo;s not a bulletproof solution, because if work is quite short, trace of adding and removing tag is lost. It still might work if our solution registers the fact that work has been begun. It would be simpler if we had two events in the time, tag added and tag removed. Then time spent is just a difference between tag removal and assignment. However with tag traces disappearing solution needs be more complex.</p>
+
+<p>Alternative solution is leaving a comment with &ldquo;wip&rdquo; token, but it seems like this might be obscuring rest of the communication.</p>
+
+<h2>API analysis</h2>
+
+<p>Before doing any work let&rsquo;s see what can be done with a API. For starters this is what we want to do:</p>
+
+<ol>
+<li><p>query for tasks in Asana possibly with some filtering</p></li>
+<li><p>query issues in Youtrack</p></li>
+<li><p>create issues in Youtrack</p></li>
+<li><p>add time tracking information to issues on behalf developer</p></li>
+</ol>
+
+
+<p>These are minimal requirements for one way integration.</p>
+
+<p>Let&rsquo;s take a look what&rsquo;s actually possible with APIs.</p>
+
+<h2>1. Query for tasks in Asana possibly with some filtering</h2>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>GET    /tasks
+</span><span class='line'>GET    /projects/project-id/tasks
+</span><span class='line'>GET    /workspaces/workspace-id/tasks</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>We are in luck. API allows to query for tasks in a project or workspace or all of them. Also limited filtering is possible for example by <code>modified_since</code> attribute which might be useful. General idea of syncing service is that it will probably be run in some intervals therefore filtering by last run&rsquo;s date seems useful.</p>
+
+<h2>2. query issues in Youtrack</h2>
+
+<p>This is required to check if given task has been already synchronized or not. In alternative to querying we could store already mapped tasks' ids and created issues. However storing anything obviously requires some kind of storage. If solution can deal without storage it is even better assuming that it works the same and within limits of APIs requests per minute.</p>
+
+<p><a href="http://confluence.jetbrains.com/display/YTD5/Get+Issues+in+a+Project" title="get issues in a project">Get issues in a project API</a></p>
+
+<p>Allows to query for issues in a certain project. That&rsquo;s enough. We can assume that project will be configurable later on so we know where to sync and create issues.</p>
+
+<h2>3. create issues in Youtrack</h2>
+
+<p><a href="http://confluence.jetbrains.com/display/YTD5/Create+New+Issue" title="new issue">Create new issue API</a> shows how to do it.
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>PUT /rest/issue?{project}&amp;{summary}&amp;{description}&amp;{attachments}&amp;{permittedGroup}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Got it!</p>
+
+<h2>4. add time tracking information to issues on behalf developer</h2>
+
+<p>This one wasn&rsquo;t obvious especially because of &ldquo;on behalf&rdquo; part. We want to see time tracking information as the developer himself would have added. There an specific API which allows to record time, but it adds it as the user who performs request. Is that ok? Well it depends. If you are ok with giving out your credentials so service performs requests as you then sure. Youtrack documentation doesn&rsquo;t mention API keys so only login + cookie workflow is available, hence it requires your credentials.
+I think that better option is if we have some special user on Youtrack which will interact with API and make all requets. Same account can be used in Asana, although Asana supports API keys so that&rsquo;s better. As for now we only query Asana therefore we can do that from special account and if we would need to make some changes on someone else behalf then API keys should be used.</p>
+
+<p>So I found that doing some action as someone else is only possible by <a href="http://confluence.jetbrains.com/display/YTD5/Apply+Command+to+an+Issue" title="apply command">applying command to an issue</a>. There is parameter called <code>runAs</code> which takes login of the user it should be run as. This <code>runAs</code> parameter requires some specific permissions which is fine if we use special account just for our application. Great! Now let&rsquo;s look for adding time tracking information command.</p>
+
+<p>A little bit more search and there it is, <a href="http://confluence.jetbrains.com/display/YTD5/Adding+Work+Items+to+Issue#AddingWorkItemstoIssue-AddingworkitemviaCommandWindow" title="work-item-command">adding work item to issue via command</a></p>
+
+<h2>Deployment</h2>
+
+<p>APIs allow to implement our solution. Some details will be needing clarifications but general building blocks are there. Now before thinking how we would implement it let&rsquo;s think where can we run it.</p>
+
+<p>Let&rsquo;s add another requirement: Running it shouldn&rsquo;t cost money.</p>
+
+<p>This might seem silly, because it&rsquo;s impossible in the long term, but there are cloud providers which give some free time which might be just enough for our solution.</p>
+
+<p>I checked Heroku and Amazon AWS. Heroku allows to run 1 web dyno which goes idle if there is no traffic. Web dyno is not exactly what we would require, but it could work. Problem is with it going idle if there is no traffic. There is another dyno type called <code>worker</code>. Workers never go idle but they cost money therefore are not applicable.</p>
+
+<p>Amazon AWS gives 750 hours a month of <a href="https://aws.amazon.com/free/" title="AmazonAWSfree">Amazon EC2 service</a> which really hits the spot, at least for first year. There is also no problem of anything going idle. Maybe there are better alternatives but for now I got one good candidate and I know I can move on.</p>
+
+<h1>Wrapping up first part</h1>
+
+<p>We identified problem, checked that there are no ready solutions around. Defined requirements for APIs. Checked that APIs satisfy these requirements therefore application can be created. We also found a place to run it for free for the first year.</p>
+
+<p>In the next part I will describe implementation process. <a href="http://spray.io/" title="spray">Spray</a> with <a href="http://akka.io/" title="akka">Akka</a> stack is a good candidate for this integration component because of nice abstractions for interacting with APIs and scheduling built in. Whole application will be run using <a href="https://www.docker.com/" title="Docker">Docker</a> so it will be easy to change the actual server it runs on.</p>
+]]></content>
+  </entry>
+  
+</feed>
